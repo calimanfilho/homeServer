@@ -1,0 +1,153 @@
+name: media
+
+services:
+
+  qbittorrent:
+    image: qbittorrentofficial/qbittorrent-nox:latest
+    container_name: qbittorrent
+    environment:
+      - QBT_EULA=accept
+      - QBT_WEBUI_PORT=8080
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/qbittorrent/config:/config
+      - /home/calimanfilho/data:/data
+    ports:
+      # for WebUI
+      - 8080:8080/tcp
+      # for bittorrent traffic
+      - 6881:6881/tcp
+      - 6881:6881/udp
+    restart: unless-stopped
+
+  # sabnzbd:
+  #   image: linuxserver/sabnzbd:latest
+  #   container_name: sabnzbd
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=America/Belem
+  #   volumes:
+  #     - /home/calimanfilho/sabnzbd/config:/config
+  #     - /home/calimanfilho/data:/data
+  #   ports:
+  #     - 8119:8080
+  #   restart: unless-stopped
+
+  jackett:
+    image: linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - AUTO_UPDATE=true #optional
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/jackett/config:/config
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+      - TZ=America/Belem
+    ports:
+      - 8191:8191
+    restart: unless-stopped
+
+  recyclarr:
+    image: recyclarr/recyclarr:latest
+    container_name: recyclarr
+    environment:
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/recyclarr/config:/config
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/radarr/config:/config
+      - /home/calimanfilho/data:/data
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/sonarr/config:/config
+      - /home/calimanfilho/data:/data
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/prowlarr/config:/config
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+
+  bazarr:
+    image: linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/bazarr/config:/config
+      - /home/calimanfilho/data:/data
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+
+  plex:
+    image: plexinc/pms-docker:latest
+    container_name: plex
+    environment:
+      - PLEX_CLAIM=claim-6qvw37bKk41e_2P3zpyk
+      - PLEX_UID=1000
+      - PLEX_GID=1000
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/plex/config:/config
+      - /tmp/plex:/transcode
+      - /home/calimanfilho/data:/data
+    devices:
+      - /dev/dri:/dev/dri
+    network_mode: host
+    restart: unless-stopped
+
+  overseerr:
+    image: sctx/overseerr:latest
+    container_name: overseerr
+    environment:
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/overseerr/config:/app/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped

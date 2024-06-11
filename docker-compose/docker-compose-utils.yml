@@ -1,0 +1,46 @@
+name: utils
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    ports:
+      - 9000:9000
+    restart: unless-stopped
+
+  homarr:
+    image: ghcr.io/ajnart/homarr:latest
+    container_name: homarr
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/calimanfilho/homarr/configs:/app/data/configs
+      - /home/calimanfilho/homarr/icons:/app/public/icons
+      - /home/calimanfilho/homarr/data:/data
+    ports:
+      - 80:7575
+    restart: unless-stopped
+
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  zerotier:
+    image: zerotier/zerotier:latest
+    container_name: zerotier
+    volumes:
+      - /home/calimanfilho/zerotier:/var/lib/zerotier-one
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+    restart: unless-stopped
+
+volumes:
+  portainer_data:

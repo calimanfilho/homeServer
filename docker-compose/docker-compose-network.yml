@@ -1,0 +1,32 @@
+name: 'network'
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    command: ["proxy-dns"]
+    environment:
+      # Listen address for the DNS over HTTPS proxy server.
+      - TUNNEL_DNS_ADDRESS=0.0.0.0
+      # Listen on given port for the DNS over HTTPS proxy server.
+      - TUNNEL_DNS_PORT=5053
+      # Upstream endpoint URL, you can specify multiple endpoints for redundancy.
+      - TUNNEL_DNS_UPSTREAM=https://1.1.1.1/dns-query,https://1.0.0.1/dns-query      
+    network_mode: host
+    restart: unless-stopped
+
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    depends_on:
+      - cloudflared
+    environment:
+      - PIHOLE_DNS_=127.0.0.1#5053
+      - WEB_PORT=8053
+      - WEBPASSWORD=ZxRttn2mWu6tGc*qec2CHXG4
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/pihole:/etc/pihole
+      - /home/calimanfilho/dnsmasq.d:/etc/dnsmasq.d
+    network_mode: host
+    restart: unless-stopped

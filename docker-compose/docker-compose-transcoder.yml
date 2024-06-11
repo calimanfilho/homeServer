@@ -1,0 +1,20 @@
+name: transcoder
+
+services:
+  handbrake:
+    image: jlesage/handbrake:latest
+    container_name: handbrake
+    environment:
+      - DARK_MODE=1
+      - AUTOMATED_CONVERSION=0
+      - TZ=America/Belem
+    volumes:
+      - /home/calimanfilho/handbrake:/config:rw
+      - /home/calimanfilho:/storage:ro
+      - /home/calimanfilho/handbrake/watch:/watch:rw
+      - /home/calimanfilho/handbrake/output:/output:rw
+    devices:
+      - /dev/dri:/dev/dri
+    ports:
+      - "5800:5800"
+    restart: unless-stopped
