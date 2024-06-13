@@ -152,6 +152,14 @@ As próximas alterações ficam em `Tools` > `Options` > `Connection`:
 
 ![qBittorrent Connection](/images/qbittorrent-connection.gif)
 
+Essa alteração não precisa ser feita, mas apenas para informar que essa configuração que permite deletar os download concluídos do qBittorrent e mover as mídias para as pastas corretas, caso o torrent continue semeando o Radarr ou Sonarr criará *hardlinks* dos arquivos sem nenhum prejuízo na configuração, para continuar basta acessar `Tools` > `Options` > `BitTorrent`:
+
+* Marcar `When ratio reaches`;
+* Escrever em `When ratio reaches`: `0`;
+* Salvar.
+
+![qBittorrent BitTorrent](/images/qbittorrent-bittorrent.gif)
+
 As próximas mudanças são em `Tools` > `Options` > `Web UI`:
 
 * Escrever em `Password`: `<ANY_PASSWORD>`;
@@ -579,6 +587,8 @@ Existem alguns outros serviços/sites que podem ser utilizados nesse projeto, ma
 Os vídeos possuem CODEC que faz o *encodings* dos *streams* de video e *streams* de audio. Por exemplo, H.265 ou AV1, são codecs de video. MP3 ou AAC são codecs de áudio. Para empacotar os dois streams (ou mais, caso tenha múltiplas dublagens, por exemplo) em um "arquivo", pode ser utilizado por exemplo o ".mp4", ".mov" ou ".mkv". Normalmente queremos o MKV ou Matroska, que é um formato de envelope de arquivo bem flexível, permite múltiplos *streams* de tudo, incluindo de legenda, por isso é muito usado pra compartilhar em torrent.
 
 > Para ter os vídeos nas melhores qualidades possível pode ser baixado os BR-DISK que é backup de UHD e depois refazer o encoding para o perfil Matroska H.265.
+
+Caso esteja o *Home Server* esteja sendo utilizado por WSL2 será necessário usar o comando `wsl --exec dbus-launch true` no Windows PowerShell para evitar que o WSL2 para automaticamente ao fechar o Terminal.
 
 ## Extra
 
