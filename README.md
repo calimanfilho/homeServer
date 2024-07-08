@@ -133,7 +133,7 @@ As primeiras alterações nas configurações do qBittorrent será em `Tools` > 
 * Selecionar em `Default Torrent Management Mode`: `Automatic`;
 * Selecionar em `When Default Save Path changed`: `Realocate affected torrents`;
 * Selecionar em `When Category Save Path changed`: `Realocate affected torrents`;
-* Escrever em `Default Save Path`: `/data/torrent`;
+* Escrever em `Default Save Path`: `/data/torrents`;
 * Salvar.
 
 > 1. O local de *download* é definido no cliente de download.
