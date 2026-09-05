@@ -23,7 +23,7 @@ services:
     environment:
       - PIHOLE_DNS_=127.0.0.1#5053
       - WEB_PORT=8053
-      - WEBPASSWORD=<PIHOLE_WEBPASSWORD>
+      - WEBPASSWORD=${PIHOLE_WEBPASSWORD:?Set PIHOLE_WEBPASSWORD in .env}
       - TZ=America/Belem
     volumes:
       - /home/calimanfilho/pihole:/etc/pihole

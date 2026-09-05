@@ -128,7 +128,7 @@ services:
     image: plexinc/pms-docker:latest
     container_name: plex
     environment:
-      - PLEX_CLAIM=<PLEX_CLAIM_TOKEN>
+      - PLEX_CLAIM=${PLEX_CLAIM_TOKEN:?Set PLEX_CLAIM_TOKEN in .env}
       - PLEX_UID=1000
       - PLEX_GID=1000
       - TZ=America/Belem

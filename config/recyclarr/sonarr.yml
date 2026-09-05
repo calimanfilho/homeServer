@@ -1,6 +1,7 @@
 sonarr:
   series:
     base_url: http://sonarr:8989
+    # Set this value locally from Sonarr > Settings > General > API Key.
     api_key: <SONARR_API_KEY>
 
     media_naming:

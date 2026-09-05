@@ -1,6 +1,7 @@
 radarr:
   movies:
     base_url: http://radarr:7878
+    # Set this value locally from Radarr > Settings > General > API Key.
     api_key: <RADARR_API_KEY>
 
     media_naming:
